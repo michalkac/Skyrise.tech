@@ -201,9 +201,15 @@ function wordStats(inputString){//Funkcja zwraca posortowaną tablicę 10 najcz�
       }
 
   return wordStatArray.sort(function(a,b) {
-      return a[0] > b[0];//Sortuje słowa alfabetycznie.
-  }).sort(function(a,b) {
-      return a[1] < b[1];//Sortuje słowa wg ilości użyć.
+    if (a[1] === b[1]) {
+      if (a[0] === b[0]) return 0;
+      if (a[0] > b[0]) return 1;
+      return -1;
+    } else {
+      if (a[1] === b[1]) return 0;
+      if (a[1] > b[1]) return -1;
+      return 1;
+    }//Sortuje słowa alfabetycznie i wg ilości użyć jednocześnie.
   }).slice(0,10);
 
     //Być może wydajniej było by najpierw posortować tablicę wg ilości użyć, obciąć tablicę do 10 pozycji po czym ponownie posortować wyrazy alfabetycznie i wg ilości użyć.
